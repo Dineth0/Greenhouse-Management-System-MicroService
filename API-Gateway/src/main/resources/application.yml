@@ -10,7 +10,7 @@ spring:
       server:
         webflux:
           routes:
-            - id: inventory-route
+            - id: user-route
               uri: lb://user-service
               predicates:
                 - Path=/api/v1/user/**
