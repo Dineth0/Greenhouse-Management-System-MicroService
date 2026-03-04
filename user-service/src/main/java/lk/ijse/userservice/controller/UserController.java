@@ -51,6 +51,34 @@ public class UserController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
         }
     }
+    @PostMapping("/login")
+    public ResponseEntity<ResponseDTO> Login( @RequestBody UserDTO userDTO) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ResponseDTO(VarList.Unauthorized, "Invalid Credentials", e.getMessage()));
+        }
 
+        UserDTO loadedUser = userService.loadUserDetailsByUsername(userDTO.getUsername());
+        if (loadedUser == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new ResponseDTO(VarList.Conflict, "Authorization Failure! Please Try Again", null));
+        }
+
+        String token = jwtUtil.generateToken(loadedUser);
+        if (token == null || token.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new ResponseDTO(VarList.Conflict, "Authorization Failure! Please Try Again", null));
+        }
+
+        AuthDTO authDTO = new AuthDTO();
+        authDTO.setUsername(loadedUser.getUsername());
+        authDTO.setToken(token);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new ResponseDTO(VarList.Created, "Success", authDTO));
+    }
 
 }
