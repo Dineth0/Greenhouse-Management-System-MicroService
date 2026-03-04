@@ -60,6 +60,15 @@ public class UserServiceImpl implements UserService {
                 getAuthority(user)
         );
     }
+    public UserDTO loadUserDetailsByUsername(String username) throws UsernameNotFoundException {
+        User user =  userRepo.findByUsername(username);
+        if(user == null){
+            throw new UsernameNotFoundException("user not found");
+        }
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        userDTO.setRole(user.getRole());
+        return userDTO;
+    }
     @Override
     public User findByUsername(String username) {
         return userRepo.findByUsername(username);
