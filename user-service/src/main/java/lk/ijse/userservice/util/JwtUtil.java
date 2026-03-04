@@ -4,13 +4,16 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lk.ijse.userservice.dto.UserDTO;
+import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class JwtUtil {
+@Component
+public class JwtUtil implements Serializable {
     private String SECRET = "mysecret1234###";
 
     public String generateToken(UserDTO userDTO) {
