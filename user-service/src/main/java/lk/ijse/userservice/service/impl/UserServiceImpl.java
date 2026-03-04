@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService {
                 getAuthority(user)
         );
     }
-
-
-
-
+    @Override
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
 }
