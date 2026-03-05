@@ -18,7 +18,7 @@ public class WebFluxConfig {
     public WebClient webClient() {
         return WebClient.builder()
                 .baseUrl(baseUrl)
-                .defaultHeader(MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader("Content-Type", "application/json")
                 .build();
     }
 }
