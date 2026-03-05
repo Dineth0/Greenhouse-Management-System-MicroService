@@ -38,7 +38,7 @@ public class IotServiceImpl implements IotService {
     @Override
     public Mono<DeviceResponseDTO> registerDevice(String token, DeviceRequestDTO deviceRequestDTO) {
         return webClient.post()
-                .uri("/register")
+                .uri("/devices")
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                 .bodyValue(deviceRequestDTO)
                 .retrieve()

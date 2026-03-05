@@ -25,8 +25,8 @@ public class ZoneServiceImpl implements ZoneService {
             throw new RuntimeException("MinTemp must be less than MaxTemp");
         }
 
-        IOTAuthRequestDTO authRequestDTO = new IOTAuthRequestDTO("user", "password");
-        iotService.registerUser(authRequestDTO).block();
+        IOTAuthRequestDTO authRequestDTO = new IOTAuthRequestDTO("user", "12345");
+//        iotService.registerUser(authRequestDTO).block();
 
         IOTAuthResponseDTO authResponseDTO = iotService.loginUser(authRequestDTO).block();
         String token = authResponseDTO.getAccessToken();
