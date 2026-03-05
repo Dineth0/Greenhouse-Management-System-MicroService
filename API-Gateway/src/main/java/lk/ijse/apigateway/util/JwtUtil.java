@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtUtil {
-    private final String SECRET = "mysecret1234###";
+    private final String SECRET = "2D4A614E645267556B58703273357638792F423F4428472B4B6250655368566DF423F4428472B4B6250655368566D";
 
     public Claims getAllClaims(String token) {
         return Jwts.parser()

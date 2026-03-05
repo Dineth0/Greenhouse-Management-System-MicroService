@@ -1,6 +1,5 @@
 package lk.ijse.userservice.controller;
 
-import lk.ijse.userservice.config.JwtFilter;
 import lk.ijse.userservice.dto.AuthDTO;
 import lk.ijse.userservice.dto.ResponseDTO;
 import lk.ijse.userservice.dto.UserDTO;
@@ -21,21 +20,18 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
-    private final JwtFilter jwtFilter;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping("/regiser")
+    @PostMapping("/register")
     public ResponseEntity<ResponseDTO> Register(@RequestBody UserDTO userDTO) {
         try{
             int res = userService.addUser(userDTO);
             switch (res){
                 case VarList.Created -> {
-                    String token = jwtUtil.generateToken(userDTO);
-                    AuthDTO authDTO = new AuthDTO();
-                    authDTO.setUsername(userDTO.getUsername());
-                    authDTO.setToken(token);
+
+
                     return ResponseEntity.status(HttpStatus.CREATED)
-                            .body(new ResponseDTO(VarList.Created, "Success", authDTO));
+                            .body(new ResponseDTO(VarList.Created, "Success", userDTO));
                 }
                 case VarList.Not_Acceptable -> {
                     return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
@@ -53,13 +49,13 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<ResponseDTO> Login( @RequestBody UserDTO userDTO) {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new ResponseDTO(VarList.Unauthorized, "Invalid Credentials", e.getMessage()));
-        }
+//        try {
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword()));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                    .body(new ResponseDTO(VarList.Unauthorized, "Invalid Credentials", e.getMessage()));
+//        }
 
         UserDTO loadedUser = userService.loadUserDetailsByUsername(userDTO.getUsername());
         if (loadedUser == null) {
@@ -77,8 +73,8 @@ public class UserController {
         authDTO.setUsername(loadedUser.getUsername());
         authDTO.setToken(token);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ResponseDTO(VarList.Created, "Success", authDTO));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(VarList.OK, "Success", authDTO));
     }
 
 }

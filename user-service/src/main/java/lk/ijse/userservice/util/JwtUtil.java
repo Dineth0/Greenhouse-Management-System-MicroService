@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil implements Serializable {
-    private String SECRET = "mysecret1234###";
+    private String SECRET = "2D4A614E645267556B58703273357638792F423F4428472B4B6250655368566DF423F4428472B4B6250655368566D";
 
     public String generateToken(UserDTO userDTO) {
         Map<String, Object> claims = new HashMap<>();
