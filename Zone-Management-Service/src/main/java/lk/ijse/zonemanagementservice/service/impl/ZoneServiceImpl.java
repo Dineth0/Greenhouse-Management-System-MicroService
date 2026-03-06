@@ -57,4 +57,11 @@ public class ZoneServiceImpl implements ZoneService {
 
          return zoneManagementRepo.save(existingZone);
     }
+
+    @Override
+    public void deleteZone(Long id) {
+        Zone zone = zoneManagementRepo.findById(id).orElseThrow(() -> new RuntimeException("No zone found"));
+
+        zoneManagementRepo.delete(zone);
+    }
 }

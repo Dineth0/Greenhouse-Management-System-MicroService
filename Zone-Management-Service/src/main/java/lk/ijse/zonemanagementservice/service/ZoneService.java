@@ -6,4 +6,5 @@ public interface ZoneService {
     Zone createZone(Zone zone);
     Zone getZoneById(Long id);
     Zone updateZone(Long id,Zone zone);
+    void deleteZone(Long id);
 }

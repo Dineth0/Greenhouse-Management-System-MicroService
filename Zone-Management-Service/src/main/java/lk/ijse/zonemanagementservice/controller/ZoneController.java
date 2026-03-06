@@ -44,4 +44,10 @@ public class ZoneController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "suceess", updatedZone));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ResponseDTO> deleteZone(@PathVariable Long id) {
+        zoneService.deleteZone(id);
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDTO(VarList.OK, "suceess", null));
+    }
 }
