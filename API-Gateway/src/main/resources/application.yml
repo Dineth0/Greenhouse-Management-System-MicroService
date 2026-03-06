@@ -18,7 +18,7 @@ spring:
             - id: zone-management-route
               uri: lb://zone-management-service
               predicates:
-                - Path=/api/zone/**
+                - Path=/api/zones/**
 
 
 eureka:
