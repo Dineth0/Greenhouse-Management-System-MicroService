@@ -4,4 +4,5 @@ import lk.ijse.zonemanagementservice.entity.Zone;
 
 public interface ZoneService {
     Zone createZone(Zone zone);
+    Zone getZoneById(Long id);
 }

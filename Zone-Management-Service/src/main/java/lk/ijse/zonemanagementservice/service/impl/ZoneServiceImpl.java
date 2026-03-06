@@ -39,4 +39,9 @@ public class ZoneServiceImpl implements ZoneService {
 
         return zoneManagementRepo.save(zone);
     }
+
+    @Override
+    public Zone getZoneById(Long id) {
+        return zoneManagementRepo.findById(id).orElseThrow(() -> new RuntimeException("No zone found"));
+    }
 }
