@@ -37,4 +37,11 @@ public class ZoneController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "suceess", zone));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ResponseDTO> updateZone(@PathVariable Long id, @RequestBody Zone zone) {
+        Zone updatedZone = zoneService.updateZone(id, zone);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(VarList.OK, "suceess", updatedZone));
+    }
 }

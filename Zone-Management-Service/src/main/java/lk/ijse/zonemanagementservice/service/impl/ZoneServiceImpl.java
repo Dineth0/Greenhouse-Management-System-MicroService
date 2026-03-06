@@ -44,4 +44,17 @@ public class ZoneServiceImpl implements ZoneService {
     public Zone getZoneById(Long id) {
         return zoneManagementRepo.findById(id).orElseThrow(() -> new RuntimeException("No zone found"));
     }
+
+    @Override
+    public Zone updateZone(Long id, Zone zone) {
+         Zone existingZone = zoneManagementRepo.findById(id).orElseThrow(() -> new RuntimeException("No zone found"));
+
+         if(zone.getMinTemp() > zone.getMinTemp()){
+             throw new RuntimeException("MinTemp must be less than MaxTemp");
+         }
+         existingZone.setMinTemp(zone.getMinTemp());
+         existingZone.setMaxTemp(zone.getMaxTemp());
+
+         return zoneManagementRepo.save(existingZone);
+    }
 }
