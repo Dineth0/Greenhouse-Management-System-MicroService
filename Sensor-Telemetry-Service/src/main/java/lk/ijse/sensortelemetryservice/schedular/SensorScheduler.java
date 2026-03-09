@@ -21,6 +21,10 @@ public class SensorScheduler {
     public void schedule() {
         SensorDataDTO sensorDataDTO = sensorService.fetchSensorData();
 
+        if(sensorDataDTO == null){
+            System.out.println("Sensor data not available");
+            return;
+        }
         webClient.post()
                 .uri(url)
                 .bodyValue(sensorDataDTO)

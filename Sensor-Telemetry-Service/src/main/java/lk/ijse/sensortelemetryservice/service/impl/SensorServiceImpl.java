@@ -22,6 +22,8 @@ public class SensorServiceImpl implements SensorService {
     @Value("${iot.api.base-url}")
     private String baseUrl;
 
+    private String deviceId = "b751b8c9-644a-484c-ba3f-be63f9b27ad0";
+
     @Override
     public void loginUser() {
         IOTAuthRequestDTO authRequestDTO = new IOTAuthRequestDTO("Dineth", "12345");
@@ -31,6 +33,7 @@ public class SensorServiceImpl implements SensorService {
                 .retrieve()
                 .bodyToMono(IOTAuthResponseDTO.class)
                 .block();
+        System.out.println("LOGIN RESPONSE: " + response);
         if(response != null) {
             this.token = response.getAccessToken();
         }
@@ -38,23 +41,33 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     public SensorDataDTO fetchSensorData() {
-        if(this.token == null) {
+
+        if(this.token == null){
             loginUser();
         }
-        try{
+
+        try {
+
             SensorDataDTO response = webClient.get()
-                    .uri(baseUrl + "/sensors")
-                    .header("Authorization", "Bearer " + token)
+                    .uri("/devices/telemetry/" + deviceId)
+                    .header("Authorization","Bearer " + token)
                     .retrieve()
                     .bodyToMono(SensorDataDTO.class)
                     .block();
-            sensorDataDTO = response;
+            System.out.println("TELEMETRY RESPONSE: " + response);
+
+            this.sensorDataDTO = response;
+
             return response;
-        }catch (Exception e){
+
+        } catch (Exception e) {
+
+            System.out.println("Error fetching sensor data: " + e.getMessage());
+
             this.token = null;
+
             return null;
         }
-
     }
 
     @Override

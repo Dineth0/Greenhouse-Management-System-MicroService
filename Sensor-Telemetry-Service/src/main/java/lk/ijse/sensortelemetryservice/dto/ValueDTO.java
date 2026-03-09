@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class SensorDataDTO {
-    private String deviceId;
-    private String zoneId;
-    private ValueDTO value;
-    private String capturedAt;
+public class ValueDTO {
+
+    private double temperature;
+    private String tempUnit;
+    private double humidity;
+    private String humidityUnit;
+
 }

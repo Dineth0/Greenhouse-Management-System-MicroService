@@ -20,6 +20,11 @@ spring:
               predicates:
                 - Path=/api/zones/**
 
+            - id: sensor-telemetry-service
+              uri: lb://sensor-telemetry-service
+              predicates:
+                - Path=/api/sensors/**
+
 
 eureka:
   client:
