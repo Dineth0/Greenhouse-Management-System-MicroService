@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SensorDataDTO {
     private String deviceId;
-    private String zoneId;
+    private int zoneId;
     private double temperature;
     private double humidity;
 }
