@@ -30,6 +30,11 @@ spring:
               predicates:
                 - Path=/api/automation/**
 
+            - id: crop-route
+              uri: lb://crop-inventory-service
+              predicates:
+                - Path=/api/crop/**
+
 
 eureka:
   client:
