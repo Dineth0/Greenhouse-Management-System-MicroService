@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +41,8 @@ public class AutomationServiceImpl implements AutomationService {
 
                     automationRepo.save(automationLog);
                 }
+    }
+    public List<AutomationLog> getAllLogs() {
+        return automationRepo.findAll();
     }
 }

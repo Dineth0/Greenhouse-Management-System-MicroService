@@ -3,13 +3,15 @@ package lk.ijse.automationcontrolservice.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SensorDataDTO {
-    private String deviceId;
-    private Long zoneId;
-    private double temperature;
-    private double humidity;
+@Component
+public class ResponseDTO {
+    private int code;
+    private String message;
+    private Object data;
 }

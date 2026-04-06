@@ -25,6 +25,11 @@ spring:
               predicates:
                 - Path=/api/sensors/**
 
+            - id: automation-route
+              uri: lb://automation-control-service
+              predicates:
+                - Path=/api/automation/**
+
 
 eureka:
   client:

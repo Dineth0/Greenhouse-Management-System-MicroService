@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ZoneClient {
 
     @GetMapping("/api/zones/{id}")
-    ZoneThresholdDTO getZone(@PathVariable int id);
+    ZoneThresholdDTO getZone(@PathVariable Long id);
 }
