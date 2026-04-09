@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/crop")
 @RequiredArgsConstructor
@@ -39,4 +41,10 @@ public class CropController {
                 .body(new ResponseDTO(VarList.OK, "success", updateCropBatch));
     }
 
+    @GetMapping
+    public ResponseEntity<ResponseDTO> getAllCrops() {
+        List<CropBatch> getAllBatches = cropService.getAllBatches();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(VarList.OK, "success", getAllBatches));
+    }
 }
