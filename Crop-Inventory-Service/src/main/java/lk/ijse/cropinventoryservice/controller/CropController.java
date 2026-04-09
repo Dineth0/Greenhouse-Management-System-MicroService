@@ -38,4 +38,5 @@ public class CropController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "success", updateCropBatch));
     }
+
 }
