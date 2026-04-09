@@ -2,6 +2,7 @@ package lk.ijse.cropinventoryservice.controller;
 
 import lk.ijse.cropinventoryservice.dto.ResponseDTO;
 import lk.ijse.cropinventoryservice.entity.CropBatch;
+import lk.ijse.cropinventoryservice.entity.CropStatus;
 import lk.ijse.cropinventoryservice.service.CropService;
 import lk.ijse.cropinventoryservice.util.VarList;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,12 @@ public class CropController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
         }
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<ResponseDTO> updateStatus(@PathVariable Long id, @RequestParam CropStatus status) {
+        CropBatch updateCropBatch = cropService.updateStatus(id, status);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(VarList.OK, "success", updateCropBatch));
     }
 }
