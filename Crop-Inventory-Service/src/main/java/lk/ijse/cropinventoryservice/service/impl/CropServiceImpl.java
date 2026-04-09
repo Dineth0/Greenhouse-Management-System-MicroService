@@ -18,4 +18,12 @@ public class CropServiceImpl implements CropService {
         cropBatch.setCropStatus(CropStatus.SEEDLING);
         return cropRepo.save(cropBatch);
     }
+
+    @Override
+    public CropBatch updateStatus(Long id, CropStatus cropStatus) {
+        CropBatch crop = cropRepo.findById(id)
+                .orElseThrow(()-> new RuntimeException("Batch not found"));
+        crop.setCropStatus(cropStatus);
+        return cropRepo.save(crop);
+    }
 }
