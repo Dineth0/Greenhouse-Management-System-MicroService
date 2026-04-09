@@ -7,6 +7,8 @@ import lk.ijse.cropinventoryservice.service.CropService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CropServiceImpl implements CropService {
@@ -25,5 +27,10 @@ public class CropServiceImpl implements CropService {
                 .orElseThrow(()-> new RuntimeException("Batch not found"));
         crop.setCropStatus(cropStatus);
         return cropRepo.save(crop);
+    }
+
+    @Override
+    public List<CropBatch> getAllBatches() {
+        return cropRepo.findAll();
     }
 }
