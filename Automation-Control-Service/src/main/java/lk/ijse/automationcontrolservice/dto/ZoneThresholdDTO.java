@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ZoneThresholdDTO {
-    private String zoneId;
+    private Long zoneId;
     private double minTemp;
     private double maxTemp;
 }

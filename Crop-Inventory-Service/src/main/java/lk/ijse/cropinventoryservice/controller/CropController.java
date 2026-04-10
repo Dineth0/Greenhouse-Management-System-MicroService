@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/crop")
+@RequestMapping("/api/crops")
 @RequiredArgsConstructor
 @CrossOrigin
 public class CropController {
@@ -41,7 +41,7 @@ public class CropController {
                 .body(new ResponseDTO(VarList.OK, "success", updateCropBatch));
     }
 
-    @GetMapping
+    @GetMapping("getAllCrops")
     public ResponseEntity<ResponseDTO> getAllCrops() {
         List<CropBatch> getAllBatches = cropService.getAllBatches();
         return ResponseEntity.status(HttpStatus.OK)

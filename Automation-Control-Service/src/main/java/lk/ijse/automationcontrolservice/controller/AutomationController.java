@@ -27,6 +27,7 @@ public class AutomationController {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ResponseDTO(VarList.OK, "Zone Created", null));
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
         }
