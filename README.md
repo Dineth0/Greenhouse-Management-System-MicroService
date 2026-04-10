@@ -13,6 +13,7 @@ The system consists of:
 Service Registry (Eureka Server)
 Config Server
 API Gateway
+
 🔹 Domain Microservices
 Zone Management Service (Port: 8081)
 Sensor Telemetry Service (Port: 8082)
