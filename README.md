@@ -5,7 +5,7 @@
 This project is a Microservices-based Automated Greenhouse Management System developed using Spring Boot & Spring Cloud.
 It manages greenhouse zones, sensor data, automation rules, and crop inventory.
 
-🏗️ Architecture Overview
+## Architecture Overview
 
 The system consists of:
 
@@ -18,7 +18,8 @@ Zone Management Service (Port: 8081)
 Sensor Telemetry Service (Port: 8082)
 Automation & Control Service (Port: 8083)
 Crop Inventory Service (Port: 8084)
-⚙️ Prerequisites
+
+## Prerequisites
 
 Before running the project, ensure you have:
 
@@ -28,7 +29,7 @@ Git
 Postman
 PostgreSQL
 
-🚀 How to Run the System (Step-by-Step)
+## How to Run the System (Step-by-Step)
 
 ✅ Step 1: Start Config Server
 Runs on: http://localhost:8888
@@ -62,7 +63,7 @@ Runs on: http://localhost:8083
 
 Runs on: http://localhost:8084
 
-🌐 External IoT API Integration
+## External IoT API Integration
 
 Base URL:
 
@@ -85,7 +86,8 @@ Call IoT API (login)
 Get access token
 Register device
 Save zone with deviceId
-🔐 Security
+
+## Security
 JWT Authentication implemented at API Gateway
 All requests must include:
 Authorization: Bearer <token>
