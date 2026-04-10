@@ -68,6 +68,10 @@ Runs on: http://localhost:8083
 
 Runs on: http://localhost:8084
 
+🔸 User Service
+
+Runs on: http://localhost:8085
+
 ## External IoT API Integration
 
 Base URL:
