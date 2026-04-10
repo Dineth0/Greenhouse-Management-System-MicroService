@@ -115,6 +115,9 @@ JWT Authentication implemented at API Gateway
 
 All requests must include:
 
+Authorization: Bearer <token>
+
 # Eureka Dashboard
 
-Authorization: Bearer <token>
+![Screenshot](docs/DashboardScreenshot.png)
+
