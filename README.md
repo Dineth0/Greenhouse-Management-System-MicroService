@@ -24,9 +24,13 @@ Crop Inventory Service (Port: 8084)
 Before running the project, ensure you have:
 
 Java 17+
+
 Maven
+
 Git
+
 Postman
+
 PostgreSQL
 
 ## How to Run the System (Step-by-Step)
