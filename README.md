@@ -1,5 +1,6 @@
-🌱 Automated Greenhouse Management System (AGMS)
-📌 Project Overview
+🌱 # **Automated Greenhouse Management System (AGMS)**
+
+## **Project Overview**
 
 This project is a Microservices-based Automated Greenhouse Management System developed using Spring Boot & Spring Cloud.
 It manages greenhouse zones, sensor data, automation rules, and crop inventory.
