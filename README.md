@@ -79,11 +79,17 @@ Base URL:
 http://104.211.95.241:8080/api
 
 🔹 Steps
+
 Register IoT user (Postman)
+
 POST /auth/register
+
 Login
+
 POST /auth/login
+
 Create device
+
 POST /devices
 
 🔄 Zone Creation Flow
@@ -91,11 +97,17 @@ POST /devices
 When creating a zone:
 
 POST /api/zones
+
 Internal Process
+
 Validate temperature range
+
 Call IoT API (login)
+
 Get access token
+
 Register device
+
 Save zone with deviceId
 
 ## Security
