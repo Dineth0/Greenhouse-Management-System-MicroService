@@ -26,7 +26,9 @@ Maven
 Git
 Postman
 PostgreSQL
+
 🚀 How to Run the System (Step-by-Step)
+
 ✅ Step 1: Start Config Server
 Runs on: http://localhost:8888
 Provides centralized configuration for all services
