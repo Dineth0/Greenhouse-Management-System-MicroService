@@ -77,6 +77,7 @@ Runs on: http://localhost:8085
 Base URL:
 
 http://104.211.95.241:8080/api
+
 🔹 Steps
 Register IoT user (Postman)
 POST /auth/register
@@ -84,6 +85,7 @@ Login
 POST /auth/login
 Create device
 POST /devices
+
 🔄 Zone Creation Flow
 
 When creating a zone:
