@@ -20,22 +20,30 @@ public class JwtUtil implements Serializable {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userDTO.getRole());
         claims.put("id", userDTO.getId());
-        return doGenerateToken(claims, userDTO.getUsername());
+        return doGenerateToken(claims, userDTO.getUsername(), 1000 * 60 * 10);
 
     }
-    public String doGenerateToken(Map<String, Object> claims, String subject) {
+    public  String generateRefreshToken(UserDTO userDTO){
+        return doGenerateToken(new HashMap<>(), userDTO.getUsername(), 1000 * 60 * 60 * 24 * 7);
+    }
+    public String doGenerateToken(Map<String, Object> claims, String subject, int expiration) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis()+ 1000 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis()+ expiration))
                 .signWith(SignatureAlgorithm.HS256,SECRET).compact();
     }
     public String extractUsername(String token) {
         return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody().getSubject();
     }
-    public boolean validateToken(String token, String username) {
-        return (extractUsername(token).equals(username) && !isTokenExpired(token));
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+            return !isTokenExpired(token);
+        } catch (Exception e) {
+            return false;
+        }
     }
     private boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);

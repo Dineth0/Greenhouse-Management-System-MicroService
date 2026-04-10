@@ -13,6 +13,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 @CrossOrigin
@@ -58,6 +60,13 @@ public class UserController {
 //        }
 
         UserDTO loadedUser = userService.loadUserDetailsByUsername(userDTO.getUsername());
+        String accessToken = jwtUtil.generateToken(loadedUser);
+        String refreshToken = jwtUtil.generateRefreshToken(loadedUser);
+
+        AuthDTO authDTO = new AuthDTO();
+        authDTO.setUsername(loadedUser.getUsername());
+        authDTO.setToken(accessToken);
+        authDTO.setRefreshToken(refreshToken);
         if (loadedUser == null) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new ResponseDTO(VarList.Conflict, "Authorization Failure! Please Try Again", null));
@@ -69,12 +78,34 @@ public class UserController {
                     .body(new ResponseDTO(VarList.Conflict, "Authorization Failure! Please Try Again", null));
         }
 
-        AuthDTO authDTO = new AuthDTO();
+
         authDTO.setUsername(loadedUser.getUsername());
         authDTO.setToken(token);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "Success", authDTO));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<ResponseDTO> Refresh(@RequestBody Map<String, String> payload) {
+        String refreshToken = payload.get("refreshToken");
+        if (refreshToken != null && jwtUtil.validateToken(refreshToken)) {
+            String username = jwtUtil.extractUsername(refreshToken);
+            UserDTO user = userService.loadUserDetailsByUsername(username);
+
+            String newAccessToken = jwtUtil.generateToken(user);
+
+            AuthDTO authDTO = new AuthDTO();
+            authDTO.setUsername(username);
+            authDTO.setToken(newAccessToken);
+            authDTO.setRefreshToken(refreshToken);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.OK, "Token Refreshed", authDTO));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ResponseDTO(VarList.Unauthorized, "Invalid Refresh Token", null));
     }
 
 }
