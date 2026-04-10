@@ -32,12 +32,15 @@ PostgreSQL
 ✅ Step 1: Start Config Server
 Runs on: http://localhost:8888
 Provides centralized configuration for all services
+
 ✅ Step 2: Start Eureka Server (Service Registry)
 Dashboard: http://localhost:8761
 All services must register here
+
 ✅ Step 3: Start API Gateway
 Runs on: http://localhost:8080
 Handles routing and JWT security
+
 ✅ Step 4: Start Domain Services
 
 Start services one by one:
